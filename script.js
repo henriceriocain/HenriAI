@@ -57,9 +57,10 @@ async function sendMessage() {
             const fetchPromise = fetch('https://66m36kwj9h3e2j-7860.proxy.runpod.net/generate', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ text: message })
+                body: JSON.stringify({ text: message }),
+                mode: 'cors' // Explicitly set CORS mode
             });
             
             // Race between fetch and timeout
