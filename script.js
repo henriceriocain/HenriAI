@@ -53,13 +53,13 @@ async function sendMessage() {
                 setTimeout(() => reject(new Error('Request timed out')), REQUEST_TIMEOUT)
             );
             
-            // Create fetch promise
-            const fetchPromise = fetch('http://localhost:8000/generate', {
+            // Create fetch promise - Using RunPod API
+            const fetchPromise = fetch('https://66m36kwj9h3e2j-7860.proxy.runpod.net/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message: message })
+                body: JSON.stringify({ text: message })
             });
             
             // Race between fetch and timeout
@@ -72,9 +72,6 @@ async function sendMessage() {
             // Show AI response
             if (data.response) {
                 let responseText = data.response;
-                if (data.timing) {
-                    responseText += `\n\n(Generated in ${data.timing.total_time} seconds)`;
-                }
                 appendMessage('bot', responseText);
             } else {
                 throw new Error('Invalid response from server');
