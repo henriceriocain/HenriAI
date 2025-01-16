@@ -151,3 +151,62 @@ messageInput.addEventListener('keydown', function(e) {
 });
 
 autoResize(messageInput);
+
+// Authentication functionality
+const CORRECT_PASSWORD = "test"; 
+
+// Get DOM elements
+const authScreen = document.getElementById('authScreen');
+const passwordSection = document.getElementById('passwordSection');
+const nameSection = document.getElementById('nameSection');
+const mainContent = document.getElementById('mainContent');
+const passwordInput = document.getElementById('passwordInput');
+const nameInput = document.getElementById('nameInput');
+const passwordError = document.getElementById('passwordError');
+
+// Add event listeners for buttons
+document.getElementById('passwordSubmit').addEventListener('click', checkPassword);
+document.getElementById('nameSubmit').addEventListener('click', submitName);
+
+// Add event listeners for Enter key
+passwordInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault(); 
+        checkPassword();
+    }
+});
+
+nameInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        submitName();
+    }
+});
+
+function checkPassword() {
+    const password = passwordInput.value.trim();
+    if (password === CORRECT_PASSWORD) {
+        passwordSection.classList.add('fade-out');
+        setTimeout(() => {
+            passwordSection.classList.add('hidden');
+            nameSection.classList.remove('hidden');
+            nameInput.focus();
+        }, 500);
+    } else {
+        passwordInput.value = '';
+        if (passwordError) {
+            passwordError.style.display = 'block';
+        }
+    }
+}
+
+function submitName() {
+    const name = nameInput.value.trim();
+    if (name) {
+        authScreen.classList.add('fade-out');
+        setTimeout(() => {
+            authScreen.classList.add('hidden');
+            mainContent.classList.remove('hidden');
+        }, 500);
+    }
+}
