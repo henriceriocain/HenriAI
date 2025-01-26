@@ -53,8 +53,7 @@ async function sendMessage() {
                 setTimeout(() => reject(new Error('Request timed out')), REQUEST_TIMEOUT)
             );
             
-            // Create fetch promise - Using RunPod API
-            const fetchPromise = fetch('https://ckohsm49nbfisq-7860.proxy.runpod.net/', {
+            const fetchPromise = fetch('https://henriai-server.onrender.com/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
