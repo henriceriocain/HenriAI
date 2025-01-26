@@ -54,7 +54,7 @@ async function sendMessage() {
             );
             
             // Create fetch promise - Using RunPod API
-            const fetchPromise = fetch('https://ckohsm49nbfisq-7860.proxy.runpod.net/generate', {
+            const fetchPromise = fetch('https://ckohsm49nbfisq-7860.proxy.runpod.net/', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
