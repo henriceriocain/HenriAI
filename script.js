@@ -1,7 +1,7 @@
 const messageInput = document.querySelector('.message-input');
 const sendButton = document.querySelector('.send-button');
 const chatContainer = document.querySelector('.chat-container');
-const REQUEST_TIMEOUT = 120000; // 2 minutes timeout
+const REQUEST_TIMEOUT = 240000; // 2 minutes timeout
 
 // Create loading stages
 const loadingStages = [
