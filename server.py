@@ -5,6 +5,7 @@ from pydantic import BaseModel
 import requests
 import time
 import logging
+import os
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -24,9 +25,9 @@ app.add_middleware(
 class MessageInput(BaseModel):
     text: str
 
-# Configuration
-HF_TOKEN = "your_token_here"  
-ENDPOINT_URL = "your_endpoint_url_here"
+# Keys
+HF_TOKEN = os.getenv('HF_TOKEN')
+ENDPOINT_URL = os.getenv('ENDPOINT_URL')
 
 headers = {
     "Authorization": f"Bearer {HF_TOKEN}",
