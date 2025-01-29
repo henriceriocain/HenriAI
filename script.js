@@ -1,5 +1,5 @@
 // ----- Authentication -----
-const CORRECT_PASSWORD = "test1"; 
+const CORRECT_PASSWORD = "test"; 
 
 const authScreen = document.getElementById('authScreen');
 const passwordSection = document.getElementById('passwordSection');
@@ -105,15 +105,14 @@ async function sendMessage() {
                 setTimeout(() => reject(new Error('Request timed out')), REQUEST_TIMEOUT)
             );
             
-            // Fetch from Hugging Face Inference Endpoint
+            // Fetch from your public Hugging Face Inference Endpoint (no token needed)
             const fetchPromise = fetch("https://xbx8ej11mghp3mkw.us-east-1.aws.endpoints.huggingface.cloud", {
                 method: "POST",
                 headers: {
-                    "Authorization": "Bearer YOUR_HUGGINGFACE_API_TOKEN",
+                    "Accept": "application/json",
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    // Prompt style matching your training format
                     inputs: `Question: ${message}\nAnswer:`,
                     parameters: {
                         max_new_tokens: 128,
