@@ -1,5 +1,5 @@
 // ----- Authentication -----
-const CORRECT_PASSWORD = "test"; 
+const CORRECT_PASSWORD = "test1"; 
 
 const authScreen = document.getElementById('authScreen');
 const passwordSection = document.getElementById('passwordSection');
@@ -127,14 +127,24 @@ async function sendMessage() {
             const response = await Promise.race([fetchPromise, timeoutPromise]);
             const data = await response.json();
             
-            console.log(data); // See the raw response (array)
-
+            console.log(data); // Debug: see the full raw response
+            
             // Remove loading message
             chatContainer.removeChild(loadingDiv);
             
             // data is an array with an object containing generated_text
             if (Array.isArray(data) && data.length > 0 && data[0].generated_text) {
-                appendMessage('bot', data[0].generated_text);
+                // Post-process so we only show text after "Answer:"
+                let rawOutput = data[0].generated_text;
+                let answerPart = rawOutput;
+                
+                // If the output includes "Answer:", split to only show content after it
+                if (rawOutput.includes("Answer:")) {
+                    // Splits on "Answer:" and takes the final chunk
+                    answerPart = rawOutput.split("Answer:").pop().trim();
+                }
+                
+                appendMessage('bot', answerPart);
             } else {
                 throw new Error('No generated_text field found in response.');
             }
