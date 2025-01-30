@@ -1,5 +1,5 @@
 // ----- Authentication -----
-const CORRECT_PASSWORD = "test1"; 
+const CORRECT_PASSWORD = "test"; 
 
 const authScreen = document.getElementById('authScreen');
 const passwordSection = document.getElementById('passwordSection');
@@ -134,16 +134,18 @@ async function sendMessage() {
             
             // data is an array with an object containing generated_text
             if (Array.isArray(data) && data.length > 0 && data[0].generated_text) {
-                // Post-process so we only show text after "Answer:"
                 let rawOutput = data[0].generated_text;
                 let answerPart = rawOutput;
                 
                 // If the output includes "Answer:", split to only show content after it
                 if (rawOutput.includes("Answer:")) {
-                    // Splits on "Answer:" and takes the final chunk
-                    answerPart = rawOutput.split("Answer:").pop().trim();
+                    const parts = rawOutput.split("Answer:");
+                    answerPart = parts[parts.length - 1].trim();
                 }
                 
+                // Remove leftover "Question:" lines
+                answerPart = answerPart.replace(/Question:/g, "").trim();
+
                 appendMessage('bot', answerPart);
             } else {
                 throw new Error('No generated_text field found in response.');
