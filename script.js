@@ -127,15 +127,14 @@ async function sendMessage() {
             const response = await Promise.race([fetchPromise, timeoutPromise]);
             const data = await response.json();
             
-            // Debug line to see the raw response
-            console.log(data);
-            
+            console.log(data); // See the raw response (array)
+
             // Remove loading message
             chatContainer.removeChild(loadingDiv);
             
-            // Show AI response
-            if (data.generated_text) {
-                appendMessage('bot', data.generated_text);
+            // data is an array with an object containing generated_text
+            if (Array.isArray(data) && data.length > 0 && data[0].generated_text) {
+                appendMessage('bot', data[0].generated_text);
             } else {
                 throw new Error('No generated_text field found in response.');
             }
