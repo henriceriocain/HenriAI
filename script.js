@@ -127,6 +127,9 @@ async function sendMessage() {
             const response = await Promise.race([fetchPromise, timeoutPromise]);
             const data = await response.json();
             
+            // Debug line to see the raw response
+            console.log(data);
+            
             // Remove loading message
             chatContainer.removeChild(loadingDiv);
             
@@ -175,9 +178,10 @@ function appendMessage(type, text) {
     
     messageDiv.innerHTML = `
         <div class="message-content">
-            ${type === 'user'
-                ? `<div class="message-text">${formattedText}</div><div class="avatar">U</div>`
-                : `<div class="avatar">AI</div><div class="message-text">${formattedText}</div>`
+            ${
+                type === 'user'
+                    ? `<div class="message-text">${formattedText}</div><div class="avatar">U</div>`
+                    : `<div class="avatar">AI</div><div class="message-text">${formattedText}</div>`
             }
         </div>
     `;
