@@ -1,5 +1,5 @@
 // ----- Authentication -----
-const CORRECT_PASSWORD = "test2"; 
+const CORRECT_PASSWORD = "test"; 
 
 const authScreen = document.getElementById('authScreen');
 const passwordSection = document.getElementById('passwordSection');
