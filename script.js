@@ -1,5 +1,5 @@
 // ----- Authentication -----
-const CORRECT_PASSWORD = "test"; 
+const CORRECT_PASSWORD = "test2"; 
 
 const authScreen = document.getElementById('authScreen');
 const passwordSection = document.getElementById('passwordSection');
@@ -105,7 +105,7 @@ async function sendMessage() {
                 setTimeout(() => reject(new Error('Request timed out')), REQUEST_TIMEOUT)
             );
             
-            // Fetch from your public Hugging Face Inference Endpoint (no token needed)
+            // Updated fetch configuration to match test environment
             const fetchPromise = fetch("https://xbx8ej11mghp3mkw.us-east-1.aws.endpoints.huggingface.cloud", {
                 method: "POST",
                 headers: {
@@ -115,9 +115,12 @@ async function sendMessage() {
                 body: JSON.stringify({
                     inputs: `Question: ${message}\nAnswer:`,
                     parameters: {
-                        max_new_tokens: 128,
+                        max_length: 512,
                         temperature: 0.7,
-                        do_sample: true
+                        do_sample: true,
+                        use_cache: true,
+                        num_return_sequences: 1,
+                        return_full_text: true
                     }
                 }),
                 mode: 'cors'
@@ -132,21 +135,18 @@ async function sendMessage() {
             // Remove loading message
             chatContainer.removeChild(loadingDiv);
             
-            // data is an array with an object containing generated_text
+            // Updated response handling to better match test environment
             if (Array.isArray(data) && data.length > 0 && data[0].generated_text) {
                 let rawOutput = data[0].generated_text;
-                let answerPart = rawOutput;
                 
-                // If the output includes "Answer:", split to only show content after it
-                if (rawOutput.includes("Answer:")) {
-                    const parts = rawOutput.split("Answer:");
-                    answerPart = parts[parts.length - 1].trim();
-                }
+                // Extract everything after "Answer:" and before the next "Question:" if present
+                const answerMatch = rawOutput.match(/Answer:([\s\S]*?)(?=Question:|$)/);
+                const answerPart = answerMatch ? answerMatch[1].trim() : rawOutput.trim();
                 
-                // Remove leftover "Question:" lines
-                answerPart = answerPart.replace(/Question:/g, "").trim();
-
-                appendMessage('bot', answerPart);
+                // Remove any remaining "Question:" prefixes and trim
+                const cleanedAnswer = answerPart.replace(/Question:/g, '').trim();
+                
+                appendMessage('bot', cleanedAnswer);
             } else {
                 throw new Error('No generated_text field found in response.');
             }
