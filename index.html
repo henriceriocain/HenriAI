@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HenriAI</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg" />
-    <link rel="shortcut icon" href="favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="HenriAI" />
-    <link rel="manifest" href="favicon/site.webmanifest" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HenriAI</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link rel="icon" type="image/png" href="favicon/favicon-96x96.png" sizes="96x96"/>
+  <link rel="icon" type="image/svg+xml" href="favicon/favicon.svg"/>
+  <link rel="shortcut icon" href="favicon/favicon.ico"/>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png"/>
+  <meta name="apple-mobile-web-app-title" content="HenriAI"/>
+  <link rel="manifest" href="favicon/site.webmanifest"/>
 </head>
 <body>
-  
-    <!-- Authentication Screen -->
-    <div id="authScreen" class="auth-screen">
-        <div class="auth-content">
-            <h1 class="auth-title">Henri<span class="ai-highlight">AI</span></h1>
-            <div id="passwordSection">
-                <div class="auth-input-group">
-                    <input type="password" id="passwordInput" class="auth-input" placeholder="Enter password" autofocus>
-                    <button id="passwordSubmit" class="auth-button">Submit</button>
-                </div>
-            </div>
-            <div id="nameSection" class="hidden">
-                <div class="auth-input-group">
-                    <input type="text" id="nameInput" class="auth-input" placeholder="Enter your name">
-                    <button id="nameSubmit" class="auth-button">Submit</button>
-                </div>
-            </div>
+  <!-- Authentication Screen -->
+  <div id="authScreen" class="auth-screen">
+    <div class="auth-content">
+      <h1 class="auth-title">Henri<span class="ai-highlight">AI</span></h1>
+      <div id="passwordSection">
+        <div class="auth-input-group">
+          <input type="password" id="passwordInput" class="auth-input" placeholder="Enter password" autofocus />
+          <button id="passwordSubmit" class="auth-button">Submit</button>
         </div>
+      </div>
+      <div id="nameSection" class="hidden">
+        <div class="auth-input-group">
+          <input type="text" id="nameInput" class="auth-input" placeholder="Enter your name" />
+          <button id="nameSubmit" class="auth-button">Submit</button>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <!-- Main Content -->
-    <div id="mainContent">
-        <header class="header">
-            <div class="brand-title">
-                Henri<span class="ai-highlight">AI</span>
-            </div>
-            <div class="portfoliolink">
-                <div class="arrow">→</div>
-                <a href="https://henriceriocain.ca/" target="_blank" class="text">hnricriocnprtfo</a>
-            </div>
-        </header>
+  <!-- Main Content -->
+  <div id="mainContent" class="hidden">
+    <header class="header">
+      <div class="brand-title">Henri<span class="ai-highlight">AI</span></div>
+      <div class="portfoliolink">
+        <div class="arrow">→</div>
+        <a href="https://henriceriocain.ca/" target="_blank" class="text">hnricriocnprtfo</a>
+      </div>
+    </header>
 
-        <main class="chat-container">
-            <div class="welcome-note">
-                <p>The HenriAI model is in its final stages of development and will be released very, very soon.</p>
-                <p>Stay tuned for the release, and thanks for checking it out!</p>
-            </div>
-        </main>
+    <main class="chat-container">
+      <div class="welcome-note">
+        <p>The HenriAI model is in its final stages of development and will be released very, very soon.</p>
+        <p>Stay tuned for the release, and thanks for checking it out!</p>
+      </div>
+    </main>
 
-        <footer class="input-container">
-            <div class="input-wrapper">
-                <div class="input-group">
-                    <textarea class="message-input" placeholder="Type your message..." rows="1"></textarea>
-                    <button class="send-button">Send</button>
-                </div>
-            </div>
-        </footer>
-    </div>
+    <footer class="input-container">
+      <div class="input-wrapper">
+        <div class="input-group">
+          <textarea class="message-input" placeholder="Type your message..." rows="1"></textarea>
+          <button class="send-button">Send</button>
+        </div>
+      </div>
+    </footer>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Order matters: config -> client -> app -->
+  <script src="config.js"></script>
+  <script src="apiClient.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
